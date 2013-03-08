@@ -1,0 +1,7 @@
+1. Refactoring: Periodically go through solved problems looking for common
+   utils, extract into a common library
+
+2. Benchmarking: For solved problems, re-solve if an improvement is obvious and
+   benchmark the result.  Repeat the benchmark a large number of times to
+   smooth out the noise.  Watch the results for automated optimizations by the
+   Ruby interpreter (i.e. large runtimes for the first run)
