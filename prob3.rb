@@ -1,8 +1,8 @@
-# http://projecteuler.net/index.php?section=problems&id=3 
+# http://projecteuler.net/index.php?section=problems&id=3
 
 # The prime factors of 13195 are 5, 7, 13 and 29.
 
-# What is the largest prime factor of the number 600851475143 ? 
+# What is the largest prime factor of the number 600851475143 ?
 #
 
 # Output results
@@ -30,13 +30,13 @@ def find_divisors primary_num
   c.each do |val|
     if primary_num % val == 0
       divisors.push val
-    end 
+    end
   end
   divisors
-end 
+end
 
 
-main_num = 600851475143 
+main_num = 600851475143
 divs = find_divisors main_num
 
 
@@ -48,4 +48,4 @@ divs.each do |d|
   prime_divs.push(d) if is_prime?(d)
 end
 
-puts "Prime divisors:\n #{prime_divs}" 
+puts "Prime divisors:\n #{prime_divs}"
