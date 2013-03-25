@@ -1,10 +1,19 @@
 
+# is_prime?(number)
+#
+# Returns true if the provided number has no divisors besides itself and 1
+#
+# number - A positive integer
 def is_prime? number
-  # assume number is a postive integer
   divs = find_divisors number
   divs.empty?
 end
 
+# find_divisors(primary_num)
+#
+# Returns an array of divisors of primary_num, excluding 1 and primary_num
+#
+# primary_num - A positive integer
 def find_divisors primary_num
 
   root = primary_num ** 0.5
