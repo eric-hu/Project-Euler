@@ -7,9 +7,9 @@ def is_palindrome? number
     counter = num_string.length / 2
 
     palindromic = true
-    counter.times {|n| palindromic &&= ( num_string[n] == num_string[-n-1])} 
-  
-  palindromic  
+    counter.times {|n| palindromic &&= ( num_string[n] == num_string[-n-1])}
+
+  palindromic
 end
 
 range = 100..999
@@ -19,7 +19,7 @@ largest = 0
 range.each { |n|
   range.each { |m|
     num = m * n
-    largest = num if is_palindrome?(num) && num > largest 
+    largest = num if is_palindrome?(num) && num > largest
     #puts "n: #{n}, m: #{m}" if num == 906609
 
   }
