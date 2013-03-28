@@ -33,6 +33,14 @@
 # Result
 # 70600674
 
+# Possible optimizations or improvements:
+# 1. Rewrite this solution to use Ruby's Matrix class. That class came up
+#    during API reading for this solution, but Matrix doesn't appear to be
+#    available in IRB 1.9.3
+# 2. Rename and refactor the method names.
+# 3. Build a string-to-matrix parsing method (if one doesn't already exist in
+#    the Ruby Matrix class).
+
 # ============================  Support Functions =============================
 # Internal: Returns the formatted input.
 #
