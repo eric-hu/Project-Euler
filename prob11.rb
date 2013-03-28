@@ -34,7 +34,9 @@
 # 70600674
 
 # ============================  Support Functions =============================
+# Internal: Returns the formatted input.
 #
+# Returns an array of arrays of numbers.
 def input_as_array
   # Remove leading zeroes since Ruby treats numbers like 00 as octal.  08 and
   # 09 are invalid
@@ -60,8 +62,11 @@ def input_as_array
   [ 1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48]]
 end
 
-# Take an array of numbers and computes each product of 4 adjacent values.
-# Returns the maximum or 0 if there are less than 4 elements
+# Internal: Take an array and compute each product of 4 adjacent values.
+#
+# number_array - an array of numbers
+#
+# Returns the maximum or 0 if there are less than 4 elements.
 def max_consecutive_quadruple_product_of(number_array)
   return 0 if number_array.length < 4
 
@@ -76,6 +81,13 @@ def max_consecutive_quadruple_product_of(number_array)
   return max_product
 end
 
+# Internal: Take an array and find the maximum product of 4 adjacent values in
+# any row.
+#
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
+#
+# Returns a fixnum, just the maximum.
 def max_quadruple_product_of_rows_of(number_2d_array)
   max_product = 0
   number_2d_array.map do |row|
@@ -85,6 +97,13 @@ def max_quadruple_product_of_rows_of(number_2d_array)
   max_product
 end
 
+# Internal: Take an array and find the maximum product of 4 adjacent values in
+# any column.
+#
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
+#
+# Returns a fixnum, just the maximum.
 def max_quadruple_product_of_columns_of(number_2d_array)
   max_product = 0
 
@@ -100,8 +119,8 @@ end
 # provided array.  The forward diagonals are those constructed by stepping
 # through the array left-to-right, top-to-bottom.
 #
-# number_2d_array - A 2-d array numbers.  This method was build expecting a
-#                   square matrix, and may break if that isn't the case.
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
 #
 # Examples
 #
@@ -133,8 +152,8 @@ end
 # provided array.  Backward diagonals are those constructed by stepping
 # through the array right-to-left, top-to-bottom.
 #
-# number_2d_array - A 2-d array numbers.  This method was build expecting a
-#                   square matrix, and may break if that isn't the case.
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
 #
 # Examples
 #
@@ -154,6 +173,13 @@ def backward_diagonals_of(number_2d_array)
   forward_diagonals_of(new_array)
 end
 
+# Internal: Take an array and find the maximum product of 4 adjacent values in
+# any forward diagonal.  See forward_diagonals_of for definition.
+#
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
+#
+# Returns the maximum as a number.
 def max_quadruple_product_of_forward_diagonals_of(number_2d_array)
   max_product = 0
 
@@ -164,6 +190,13 @@ def max_quadruple_product_of_forward_diagonals_of(number_2d_array)
   max_product
 end
 
+# Internal: Take an array and find the maximum product of 4 adjacent values in
+# any backward diagonal.  See backward_diagonals_of for definition.
+#
+# number_2d_array - An array of arrays of numbers.  The length of all arrays
+#                   should be the same.
+#
+# Returns the maximum as a number.
 def max_quadruple_product_of_backward_diagonals_of(number_2d_array)
   max_product = 0
 
