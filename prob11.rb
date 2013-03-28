@@ -30,6 +30,9 @@
 # What is the greatest product of four adjacent numbers in the same direction
 # (up, down, left, right, or diagonally) in the 20×20 grid?
 
+# Result
+# 70600674
+
 # ============================  Support Functions =============================
 #
 def input_as_array
@@ -76,21 +79,99 @@ end
 def max_quadruple_product_of_rows_of(number_2d_array)
   max_product = 0
   number_2d_array.map do |row|
-    max_product = [max_consecutive_quadruple_product_of(number_2d_array[row]), max_product].max
+    max_product = [max_consecutive_quadruple_product_of(row), max_product].max
   end
 
+  max_product
 end
 
-def max_quadruple_product_of_columns
-  0
+def max_quadruple_product_of_columns_of(number_2d_array)
+  max_product = 0
+
+  # The rows of the transposed matrix are the same as the columns of the
+  # original matrix
+  transposed_2d_array = number_2d_array.transpose
+  max_product = max_quadruple_product_of_rows_of(transposed_2d_array)
+
+  max_product
 end
 
-def max_quadruple_product_of_forward_diagonals
-  0
+# Internal: Build an array in which each row is a forward diagonal of the
+# provided array.  The forward diagonals are those constructed by stepping
+# through the array left-to-right, top-to-bottom.
+#
+# number_2d_array - A 2-d array numbers.  This method was build expecting a
+#                   square matrix, and may break if that isn't the case.
+#
+# Examples
+#
+#   forward_diagonals_of([[1,2],
+#                         [3,4]])
+#   # => [[1,4], [3], [2]]
+#
+# Returns the built array.
+def forward_diagonals_of number_2d_array
+  length = number_2d_array.length
+
+  result = []
+  (0...length).each do |column|
+    num_diagonals = length - column
+    (0...num_diagonals).each do |starting_row|
+      diagonal = []
+      total_steps = length - [starting_row, column].max
+      (0...total_steps).each do |step|
+          diagonal.push number_2d_array[starting_row + step][column + step]
+      end
+      result.push diagonal
+    end
+  end
+
+  result
 end
 
-def max_quadruple_product_of_backward_diagonals
-  0
+# Internal: Build an array in which each row is a backward diagonal of the
+# provided array.  Backward diagonals are those constructed by stepping
+# through the array right-to-left, top-to-bottom.
+#
+# number_2d_array - A 2-d array numbers.  This method was build expecting a
+#                   square matrix, and may break if that isn't the case.
+#
+# Examples
+#
+#   backward_diagonals_of([[1,2],
+#                          [3,4]])
+#   # => [[2,3], [1], [4]]
+#
+#   # Equivalent to forward_diagonals_of([[2,1],
+#   #                                     [4,3]])
+#
+# Returns the built array.
+def backward_diagonals_of(number_2d_array)
+  # Transpose, reverse, then transpose again to get a 2-d array whose rows are
+  # reversed relative to the same row of the original
+  new_array = number_2d_array.transpose.reverse.transpose
+
+  forward_diagonals_of(new_array)
+end
+
+def max_quadruple_product_of_forward_diagonals_of(number_2d_array)
+  max_product = 0
+
+  # Build an array in which each row is a forward diagonal of number_2d_array
+  forward_diagonals = forward_diagonals_of(number_2d_array)
+  max_product = max_quadruple_product_of_rows_of(forward_diagonals)
+
+  max_product
+end
+
+def max_quadruple_product_of_backward_diagonals_of(number_2d_array)
+  max_product = 0
+
+  # Build an array in which each row is a backward diagonal of number_2d_array
+  backward_diagonals = backward_diagonals_of(number_2d_array)
+  max_product = max_quadruple_product_of_rows_of(backward_diagonals)
+
+  max_product
 end
 
 # =============================  General Solution ==============================
@@ -105,8 +186,8 @@ puts "Given the input:"
 puts input_as_array.to_s
 
 result = [max_quadruple_product_of_rows_of(input_as_array),
-          max_quadruple_product_of_columns(input_as_array),
-          max_quadruple_product_of_forward_diagonals(input_as_array),
-          max_quadruple_product_of_backward_diagonals(input_as_array)].max
+          max_quadruple_product_of_columns_of(input_as_array),
+          max_quadruple_product_of_forward_diagonals_of(input_as_array),
+          max_quadruple_product_of_backward_diagonals_of(input_as_array)].max
 
 puts "The maximum product of an adjacent quadruplet is: #{result}"
