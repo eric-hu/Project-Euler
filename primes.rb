@@ -21,11 +21,12 @@ end
 #                              inclusive.
 def nontrivial_divisors_of primary_num, options={}
   # Merge in default options
-  DEFAULT_OPTIONS = {upper_limit: primary_num}
+  default_options = {upper_limit: primary_num - 1}
+
 
   # Because default options in the argument list will be ignored/missed if a
   # partial option hash is passed in
-  options = DEFAULT_OPTIONS.merge options
+  options = default_options.merge options
 
   upper_limit = options[:upper_limit]
   c = 2..(root.floor)
