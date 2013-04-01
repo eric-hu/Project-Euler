@@ -29,10 +29,9 @@ def nontrivial_divisors_of primary_num, options={}
   options = default_options.merge options
 
   upper_limit = options[:upper_limit]
-  c = 2..(root.floor)
 
   divisors = []
-  c.each do |val|
+  (2..upper_limit).each do |val|
     if primary_num % val == 0
       divisors.push val
     end
