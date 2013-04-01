@@ -25,7 +25,7 @@
 
 # ============================  Support Functions =============================
 def triangle_number_of(number)
-  # de-optimization point
+  # Using the standard formula for the sum of the first n integers
   number * (number + 1) / 2
 end
 
@@ -57,12 +57,7 @@ end
 
 # ================================= Solution ==================================
 
-puts "divisors of 5: #{divisors_of(5)}"
-
-puts "divisors of 20: #{divisors_of(20)}"
-
 counter = 1
-incomplete = true
 current_triangle_number = triangle_number_of(counter)
 
 until divisor_count_of(current_triangle_number) > 500
