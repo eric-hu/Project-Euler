@@ -39,3 +39,27 @@ def nontrivial_divisors_of primary_num, options={}
   divisors
 end
 
+# Public: Find the prime factorization of a given number.
+#
+# number - A positive integer greater than 1
+#
+# Returns the prime factorization as a hash.  The keys are prime factors and
+# the values are the respective exponent.  Both keys and values are integers
+def prime_factorization_of number
+  counter = 2
+  result = {}
+
+  while number > 1
+    if number % counter == 0
+      result[counter] = 0
+      until number % counter != 0
+        number = number / counter
+        result[counter] += 1
+      end
+    end
+    counter += 1
+  end
+
+  result
+end
+
