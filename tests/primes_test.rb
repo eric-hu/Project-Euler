@@ -20,7 +20,13 @@ end
 
 # prime_factorization_of
 assert do
-  prime_factorization_of(2**3 * 3**2 * 7**5) == {2 => 3, 3 => 2, 7 => 5}
+  prime_factorization_of(2**3 * 3**2 * 7**5) == {2 => 3,
+                                                 3 => 2,
+                                                 7 => 5}
+  prime_factorization_of(2**1 * 3**1 * 5**1 * 7**1) == {2 => 1,
+                                                        3 => 1,
+                                                        5 => 1,
+                                                        7 => 1}
 end
 
 
