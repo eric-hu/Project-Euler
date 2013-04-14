@@ -14,10 +14,10 @@ end
 
 # Public: Find all positive divisors of a number besides 1 and the number itself
 #
-# number - A positive integer
-# options     - A Hash that can optionally alter the list of primes returned
-#               :upper_limit - The Integer upper_limit of the divisors list,
-#                              inclusive.
+# number  - A positive integer
+# options - A Hash that can optionally alter the list of primes returned
+#           :upper_limit - The Integer upper_limit of the divisors list,
+#                          inclusive.
 #
 # Returns an array of divisors of number, excluding 1 and number
 def nontrivial_divisors_of number, options={}
@@ -67,5 +67,42 @@ def prime_factorization_of number
   end
 
   result
+end
+
+# ========================  Deprecated Implementations =========================
+# Internal: the Naive class is a container for old implementations.  They're
+# left available for benchmark and comparison purposes.
+class Naive
+  class << self
+    # Internal: Find all positive divisors of a number besides 1 and the number
+    # itself.  Uses a brute-force approach of checking all values less than the
+    # number.
+    #
+    # number  - A positive integer
+    # options - A Hash that can optionally alter the list of primes returned
+    #           :upper_limit - The Integer upper_limit of the divisors list,
+    #                          inclusive.
+    #
+    # Returns an array of divisors of number, excluding 1 and number
+    def nontrivial_divisors_of number, options={}
+      # Merge in default options
+      default_options = {upper_limit: number - 1}
+
+
+      # Because default options in the argument list will be ignored/missed if a
+      # partial option hash is passed in
+      options = default_options.merge options
+
+      upper_limit = options[:upper_limit]
+
+      divisors = []
+      (2..upper_limit).each do |val|
+        if number % val == 0
+          divisors.push val
+        end
+      end
+      divisors
+    end
+  end
 end
 
