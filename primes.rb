@@ -12,16 +12,17 @@ def is_prime? number
   divisors_up_to_square_root.empty?
 end
 
-# Public: Returns an array of divisors of primary_num, excluding 1 and
-# primary_num
+# Public: Find all positive divisors of a number besides 1 and the number itself
 #
-# primary_num - A positive integer
+# number - A positive integer
 # options     - A Hash that can optionally alter the list of primes returned
 #               :upper_limit - The Integer upper_limit of the divisors list,
 #                              inclusive.
-def nontrivial_divisors_of primary_num, options={}
+#
+# Returns an array of divisors of number, excluding 1 and number
+def nontrivial_divisors_of number, options={}
   # Merge in default options
-  default_options = {upper_limit: primary_num - 1}
+  default_options = {upper_limit: number - 1}
 
 
   # Because default options in the argument list will be ignored/missed if a
@@ -32,7 +33,7 @@ def nontrivial_divisors_of primary_num, options={}
 
   divisors = []
   (2..upper_limit).each do |val|
-    if primary_num % val == 0
+    if number % val == 0
       divisors.push val
     end
   end
