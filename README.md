@@ -76,3 +76,8 @@ methods to be left in the codebase or relegated to Git's history.  For
 production code, deletion of old code is the way to go.  For educational
 projects like this one, having the "less-optimal" versions readily available
 make testing and demonstration simpler.  I guess that settles it then.
+
+## Feature Ideas
+
+- Messages for assertions
+- Move solutions out of comments into a solutions test file
