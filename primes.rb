@@ -50,11 +50,16 @@ def prime_factorization_of number
   result = {}
 
   while number > 1
-    if number % counter == 0
-      result[counter] = 0
-      until number % counter != 0
-        number = number / counter
-        result[counter] += 1
+    # This check isn't strictly necessary as a prime will always precede its
+    # composite values.  It may save time, but benchmarking should be done to
+    # confirm...even then, only if a speed improvement is necessary.
+    if is_prime?(counter)
+      if number % counter == 0
+        result[counter] = 0
+        until number % counter != 0
+          number = number / counter
+          result[counter] += 1
+        end
       end
     end
     counter += 1
