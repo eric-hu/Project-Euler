@@ -40,6 +40,8 @@
 # 2. Rename and refactor the method names.
 # 3. Build a string-to-matrix parsing method (if one doesn't already exist in
 #    the Ruby Matrix class).
+# BUG: (Minor) This problem solver iterates over the diagonal rows many times
+# more than is necessary.  Runtime is still < 1 second.
 
 # ============================  Support Functions =============================
 # Internal: Returns the formatted input.
