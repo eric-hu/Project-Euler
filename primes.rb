@@ -65,15 +65,18 @@ def prime_factorization_of number
   result = {}
 
   while number > 1
-    # This check isn't strictly necessary as a prime will always precede its
-    # composite values.
-    if is_prime?(counter)
-      if number % counter == 0
-        result[counter] = 0
-        until number % counter != 0
-          number = number / counter
-          result[counter] += 1
-        end
+    # Check if the counter divides number, reducing the number each time until
+    # counter no longer divides into it.
+    #
+    # A prime check isn't necessary as a prime will always precede its
+    # composite values.  Thus, a prime's multiples should never divide the
+    # reduced number.  This is less CPU work than checking if the counter is
+    # prime.
+    if number % counter == 0
+      result[counter] = 0
+      until number % counter != 0
+        number = number / counter
+        result[counter] += 1
       end
     end
     counter += 1
