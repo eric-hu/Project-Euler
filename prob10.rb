@@ -10,6 +10,8 @@
 # 142913828922
 # Current solution takes 5-10 minutes to run.  This problem has lots of room
 # for optimization.
+#
+# TODO: Optimize array_of_primes_less_than by implementing sieve of Erathnoses
 
 require './primes.rb'
 
