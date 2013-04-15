@@ -23,8 +23,6 @@ end
 def nontrivial_divisors_of number, options={}
   # Merge in default options
   default_options = {upper_limit: number - 1}
-
-
   # Because default options in the argument list will be ignored/missed if a
   # partial option hash is passed in
   options = default_options.merge options
@@ -40,6 +38,22 @@ def nontrivial_divisors_of number, options={}
   divisors
 end
 
+# Public: Find the number of divisors of the given number.
+#
+# number - A positive integer.
+#
+# Returns an integer.
+def divisor_count_of(number)
+  # Count the divisors by computing the prime factorization of the number and
+  # multiplying PF exponents.  1 is added to the exponents since each base can
+  # be raised to the 0 power, which is still a divisor of the given number.
+  prime_factorization = prime_factorization_of(number)
+  exponents = prime_factorization.values
+  result = exponents.inject(1) {|accum, val| accum * (val + 1)}
+
+  return result
+end
+
 # Public: Find the prime factorization of a given number.
 #
 # number - A positive integer greater than 1
@@ -52,8 +66,7 @@ def prime_factorization_of number
 
   while number > 1
     # This check isn't strictly necessary as a prime will always precede its
-    # composite values.  It may save time, but benchmarking should be done to
-    # confirm...even then, only if a speed improvement is necessary.
+    # composite values.
     if is_prime?(counter)
       if number % counter == 0
         result[counter] = 0
@@ -74,35 +87,28 @@ end
 # left available for benchmark and comparison purposes.
 class Naive
   class << self
-    # Internal: Find all positive divisors of a number besides 1 and the number
-    # itself.  Uses a brute-force approach of checking all values less than the
-    # number.
+    # Deprecated: Find divisors by manually checking all values less than
+    # number up to num/2, then manually add number to results array and return
+    # divisors as an array
+    def divisors_of(number)
+      divisors = nontrivial_divisors_of(number)
+
+      # Add in the trivial divisors
+      divisors.push number, 1
+
+      return divisors
+    end
+
+    # Deprecated: Find the number of divisors of the given number.  Divisors
+    # are found by brute force and then counted.
     #
-    # number  - A positive integer
-    # options - A Hash that can optionally alter the list of primes returned
-    #           :upper_limit - The Integer upper_limit of the divisors list,
-    #                          inclusive.
+    # number - A positive integer.
     #
-    # Returns an array of divisors of number, excluding 1 and number
-    def nontrivial_divisors_of number, options={}
-      # Merge in default options
-      default_options = {upper_limit: number - 1}
+    # Returns an integer.
+    def divisor_count_of(number)
+      divisors = divisors_of(number)
 
-
-      # Because default options in the argument list will be ignored/missed if a
-      # partial option hash is passed in
-      options = default_options.merge options
-
-      upper_limit = options[:upper_limit]
-
-      divisors = []
-      (2..upper_limit).each do |val|
-        if number % val == 0
-          divisors.push val
-        end
-      end
-      divisors
+      return divisors.length
     end
   end
 end
-
