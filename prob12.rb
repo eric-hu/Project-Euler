@@ -21,38 +21,15 @@
 #
 # What is the value of the first triangle number to have over five hundred
 # divisors?
-
+#
+# Result
+# 76576500
+require './primes.rb'
 
 # ============================  Support Functions =============================
 def triangle_number_of(number)
   # Using the standard formula for the sum of the first n integers
   number * (number + 1) / 2
-end
-
-# implement 2 more methods
-# - divisors of--generated with prime divisors
-
-# memoized_divisors_of--(can be combined with prime factorization)
-
-# Find divisors by manually checking all values less than number up to num/2,
-# then manually add number to results array and return divisors as an array
-def divisors_of(number)
-  divisors = []
-
-  # Optimization point
-  (1..number/2).each do |counter|
-    divisors.push counter if number % counter == 0
-  end
-
-  divisors.push number
-
-  return divisors
-end
-
-def divisor_count_of(number)
-  divisors = divisors_of(number)
-
-  return divisors.length
 end
 
 # ================================= Solution ==================================
@@ -68,4 +45,3 @@ until divisor_count_of(current_triangle_number) > 500
 end
 
 puts "The first triangle number with over 500 divisors is: #{current_triangle_number}"
-
