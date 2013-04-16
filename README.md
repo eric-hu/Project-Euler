@@ -46,7 +46,7 @@ can be added to problems requiring the library to make it a test case.
 
 **Rename**: Perform a read-through test to ensure that the post-refactor name
 and function still match.  An example of this idea in practice is commit
-820de4.
+820de49707a591c4 .
 
 In this commit, `find_divisors` was renamed to `nontrivial_divisors_of`.  The
 two methods are functionally the same, but `find_divisors` implies the results
