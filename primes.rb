@@ -85,6 +85,74 @@ def prime_factorization_of number
   result
 end
 
+
+def primes_less_than max
+  #result = []
+  #return result unless limit >= 2
+
+  #potential_results = (2...limit).to_a
+  #potential_results.each do |value|
+    #result.push value
+    #potential_results.reject! {|val| val % value == 0}
+    ##potential_results = potential_results.reject {|val| val % value == 0}
+    ##
+    #puts value
+
+  #end
+
+  #ps = (2..max).to_a
+  #Enumerator.new do |y|
+    #loop do
+      #break if ps.empty?
+      #p = ps.first
+      #y.yield p
+      #ps.reject! { |n| n % p == 0 }
+    #end
+  #end
+
+  #ps = (2..max).each
+  #primes_so_far = []
+  #Enumerator.new do |y|
+    #loop do
+      #p = ps.next
+
+      #if primes_so_far.none? {|divisor| p % divisor == 0}
+        #primes_so_far.push p
+        #y.yield p
+      #end
+    #end
+  #end
+
+  #ps = (2..max).to_a
+  #primes_so_far = []
+  #(2..max).each do |potential|
+    #unless primes_so_far.any? {|divisor| potential % divisor == 0}
+      #primes_so_far.push potential
+    #end
+  #end
+
+  require 'set'
+  ps = (3...max).step(2).to_set
+  #primes_so_far = Array.new(100_000)
+  #primes_so_far[99_999] = 1
+  #
+  primes_so_far = [2].to_set
+  until ps.empty? do
+    p = ps.first
+    #primes_so_far.push p
+    primes_so_far.add p
+    # Use the 2 dot range here to ensure the first element is always included
+    #p_multiples = (p..ps.max).step(p).to_set
+    p_multiples = (p..ps.max).step(p)
+    ps = ps.reject p_multiples
+  end
+
+  #primes_so_far[99_999] = nil
+
+  #primes_so_far.compact!
+  primes_so_far
+end
+
 # ========================  Deprecated Implementations =========================
 # Internal: the Naive class is a container for old implementations.  They're
 # left available for benchmark and comparison purposes.
@@ -112,6 +180,21 @@ class Naive
       divisors = divisors_of(number)
 
       return divisors.length
+    end
+
+
+    def primes_less_than limit
+
+      result = []
+
+      return result unless limit >= 2
+
+      (2...limit).each do |value|
+        #puts "value is: #{value}" if value % 10000 == 0
+        result.push value if is_prime?(value)
+      end
+
+      result
     end
   end
 end

@@ -16,23 +16,23 @@
 require './primes.rb'
 
 # =============================  Support Methods ==============================
-def array_of_primes_less_than limit
+#def array_of_primes_less_than limit
 
-  result = []
+  #result = []
 
-  return result unless limit >= 2
+  #return result unless limit >= 2
 
-  (2...limit).each do |value|
-    puts "value is: #{value}" if value % 10000 == 0
-    result.push value if is_prime?(value)
-  end
+  #(2...limit).each do |value|
+    #puts "value is: #{value}" if value % 10000 == 0
+    #result.push value if is_prime?(value)
+  #end
 
-  result
-end
+  #result
+#end
 
 # =================================  Solution ==================================
 
-upper_limit = 2_000_000
-result = array_of_primes_less_than(upper_limit).inject &:+
+upper_limit = 2_000_00
+result = primes_less_than(upper_limit).inject &:+
 
 puts "The sum of primes less than #{upper_limit} is #{result}"
