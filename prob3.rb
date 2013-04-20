@@ -17,7 +17,7 @@
 require './primes.rb'
 
 main_num = 600851475143
-divs = find_divisors main_num
+divs = nontrivial_divisors_of main_num
 
 
 puts "Divisors of main number: #{main_num}\n #{divs}"
