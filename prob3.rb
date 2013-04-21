@@ -10,22 +10,10 @@
 #839
 #1471
 #6857
-#59569
-#104441
-#486847
 
 require './primes.rb'
 
 main_num = 600851475143
-divs = nontrivial_divisors_of main_num
+prime_factors = prime_factorization_of(main_num).keys
 
-
-puts "Divisors of main number: #{main_num}\n #{divs}"
-
-
-prime_divs = []
-divs.each do |d|
-  prime_divs.push(d) if is_prime?(d)
-end
-
-puts "Prime divisors:\n #{prime_divs}"
+puts "Prime divisors:\n #{prime_factors}"
