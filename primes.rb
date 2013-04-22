@@ -85,54 +85,23 @@ def prime_factorization_of number
 end
 
 
-def primes_less_than max
-  limit = max
-  #result = []
-  #return result unless limit >= 2
-
-  #potential_results = (2...limit).to_a
-  #potential_results.each do |value|
-    #result.push value
-    #potential_results.reject! {|val| val % value == 0}
-    ##potential_results = potential_results.reject {|val| val % value == 0}
-    ##
-    ##puts value
-
-  #end
-
-  #result
-
-  #ps = (2..max).to_a
-  #Enumerator.new do |y|
-    #loop do
-      #break if ps.empty?
-      #p = ps.first
-      #y.yield p
-      #ps.reject! { |n| n % p == 0 }
-    #end
-  #end
-
-  #ps = (2..max).each
-  #primes_so_far = []
-  #Enumerator.new do |y|
-    #loop do
-      #p = ps.next
-
-      #if primes_so_far.none? {|divisor| p % divisor == 0}
-        #primes_so_far.push p
-        #y.yield p
-      #end
-    #end
-  #end
-
-  ps = (2..max).each
+# Public: Find all primes less than a given number
+#
+# number - a positive integer
+#
+# Returns: An array of primes less than the given number
+def primes_less_than number
+  ps = (2..number).each
   primes_so_far = []
-  Enumerator.new do |y|
+  enum = Enumerator.new do |y|
     loop do
       p = ps.next
       non_prime = false
 
       p_root = (p**0.5).floor
+      # Filter for primes using an inverted version of the sieve of
+      # Eratosthenes--a number is prime if it's not divisible by the primes
+      # less than it's square root.
       primes_so_far.each {|prime|
         if prime > p_root
         # if p has no divisors in primes_so_far less than p^0.5
@@ -152,34 +121,8 @@ def primes_less_than max
     end
   end
 
-  #ps = (2..max).to_a
-  #primes_so_far = []
-  #(2..max).each do |potential|
-    #unless primes_so_far.any? {|divisor| potential % divisor == 0}
-      #primes_so_far.push potential
-    #end
-  #end
+  enum.to_a
 
-  #require 'set'
-  #ps = (3...max).step(2).to_set
-  ##primes_so_far = Array.new(100_000)
-  ##primes_so_far[99_999] = 1
-  ##
-  #primes_so_far = [2].to_set
-  #until ps.empty? do
-    #p = ps.first
-    ##primes_so_far.push p
-    #primes_so_far.add p
-    ## Use the 2 dot range here to ensure the first element is always included
-    ##p_multiples = (p..ps.max).step(p).to_set
-    #p_multiples = (p..ps.max).step(p)
-    #ps = ps.reject p_multiples
-  #end
-
-  ##primes_so_far[99_999] = nil
-
-  ##primes_so_far.compact!
-  #primes_so_far
 end
 
 # ========================  Deprecated Implementations =========================
