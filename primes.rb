@@ -21,10 +21,9 @@ end
 #
 # Returns an array of divisors of number, excluding 1 and number
 def nontrivial_divisors_of number, options={}
-  # Merge in default options
   default_options = {upper_limit: number - 1}
-  # Because default options in the argument list will be ignored/missed if a
-  # partial option hash is passed in
+  # Merge in default options because default options in the argument list will
+  # be ignored/missed if a partial option hash is passed in
   options = default_options.merge options
 
   upper_limit = options[:upper_limit]
@@ -87,6 +86,7 @@ end
 
 
 def primes_less_than max
+  limit = max
   #result = []
   #return result unless limit >= 2
 
@@ -96,9 +96,11 @@ def primes_less_than max
     #potential_results.reject! {|val| val % value == 0}
     ##potential_results = potential_results.reject {|val| val % value == 0}
     ##
-    #puts value
+    ##puts value
 
   #end
+
+  #result
 
   #ps = (2..max).to_a
   #Enumerator.new do |y|
@@ -123,6 +125,33 @@ def primes_less_than max
     #end
   #end
 
+  ps = (2..max).each
+  primes_so_far = []
+  Enumerator.new do |y|
+    loop do
+      p = ps.next
+      non_prime = false
+
+      p_root = (p**0.5).floor
+      primes_so_far.each {|prime|
+        if prime > p_root
+        # if p has no divisors in primes_so_far less than p^0.5
+        # then p must be prime
+          break
+        elsif p % prime == 0
+          # the current p is not prime
+          non_prime = true
+          break
+        end
+      }
+
+      unless non_prime
+        primes_so_far.push p
+        y.yield p
+      end
+    end
+  end
+
   #ps = (2..max).to_a
   #primes_so_far = []
   #(2..max).each do |potential|
@@ -131,26 +160,26 @@ def primes_less_than max
     #end
   #end
 
-  require 'set'
-  ps = (3...max).step(2).to_set
-  #primes_so_far = Array.new(100_000)
-  #primes_so_far[99_999] = 1
-  #
-  primes_so_far = [2].to_set
-  until ps.empty? do
-    p = ps.first
-    #primes_so_far.push p
-    primes_so_far.add p
-    # Use the 2 dot range here to ensure the first element is always included
-    #p_multiples = (p..ps.max).step(p).to_set
-    p_multiples = (p..ps.max).step(p)
-    ps = ps.reject p_multiples
-  end
+  #require 'set'
+  #ps = (3...max).step(2).to_set
+  ##primes_so_far = Array.new(100_000)
+  ##primes_so_far[99_999] = 1
+  ##
+  #primes_so_far = [2].to_set
+  #until ps.empty? do
+    #p = ps.first
+    ##primes_so_far.push p
+    #primes_so_far.add p
+    ## Use the 2 dot range here to ensure the first element is always included
+    ##p_multiples = (p..ps.max).step(p).to_set
+    #p_multiples = (p..ps.max).step(p)
+    #ps = ps.reject p_multiples
+  #end
 
-  #primes_so_far[99_999] = nil
+  ##primes_so_far[99_999] = nil
 
-  #primes_so_far.compact!
-  primes_so_far
+  ##primes_so_far.compact!
+  #primes_so_far
 end
 
 # ========================  Deprecated Implementations =========================
