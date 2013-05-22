@@ -16,52 +16,48 @@
 #
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
-# 1st pass: implement the dumb way without any math or software engineering
-# optimizations to see if any memoization is needed.  Consider this an exercise
-# in prototyping.
-#
 # =============================================================================
 #
 # First pass run time: ~1 min
 # Solution: 837799
 
-def collatz_length_of starting_value
-  length = 1
-  until starting_value == 1
-    length += 1
-    starting_value = if starting_value % 2 == 0
-                         starting_value/2
-                       else
-                         3*starting_value + 1
-                       end
+# ================================= Support ===================================
+class CollatzSequence
+  attr_accessor :initial_value, :length
+
+  def initialize initial_value
+    @initial_value = initial_value
+    @length = self.class.sequence_length_of initial_value
   end
 
-  length
+  private
+
+  def self.sequence_length_of value
+    length = 1
+    until value == 1
+      length += 1
+      value = next_value(value)
+    end
+
+    length
+  end
+
+  def self.next_value value
+    value.even? ? value/2 : 3*value + 1
+  end
 end
 
+# =================================  Solution ==================================
 
-#class CollatzSequence
-
-  #def initialize
-    #value
-    #@length = nil
-  #end
-
-#end
-
-max_length = 0
-max_value = nil
-(1...1_000_000).each do |value|
-  current_length = collatz_length_of(value)
-  if current_length > max_length
-    max_length = current_length
-    max_value = value
+max_seq = CollatzSequence.new(1)
+(2...1_000_000).each do |value|
+  current_sequence = CollatzSequence.new(value)
+  if current_sequence.length > max_seq.length
+    max_seq = current_sequence
   end
-
-  puts "50k step" if value % 50000 == 0
 end
 
 puts "The longest Collatz sequence for a starting value less than a million is:"
-puts max_value
-puts "Its length is: #{max_length}"
+puts max_seq.initial_value
+puts "Its length is: #{max_seq.length}"
 
