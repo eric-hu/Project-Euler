@@ -22,10 +22,13 @@
 # Solution: 837799
 
 # ================================= Support ===================================
+# CollatzSequence is a container class for an initial value of a Collatz
+# sequence and its length.
 class CollatzSequence
   attr_accessor :initial_value, :length
 
   def initialize initial_value
+    raise "initial value must be greater than zero" unless initial_value > 0
     @initial_value = initial_value
     @length = self.class.sequence_length_of initial_value
   end
