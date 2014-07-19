@@ -108,6 +108,10 @@
 # written manually.
 # Runtime: ~1 sec
 #
+# REDO: The challenge of this problem was to build large number arithmetic. The
+# bignum coercion turned out to be reasonable in practice.  A challenging redo
+# of this problem would implement rudimentary large number math and storage.
+#
 # Solution: 5537376230
 input = %w(
 37107287533902102798797998220837590246510135740250

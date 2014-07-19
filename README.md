@@ -10,3 +10,9 @@ first to explore how basic libraries work.
 In the future, I may build a branch or fork of this repo to try refactoring out
 my code to use existing libraries.  This will be a good exercise in discovering
 and integrating third party libraries.
+
+REDOs
+=============
+
+Problems worth a revisit are tagged in comments with "REDO:".  The can be
+searched for with `grep REDO .`
